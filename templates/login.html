@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Login Page</title>
+      
+      
+      <link rel="stylesheet" type="text/css" href="css/l-styles.css">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css" >
+   
+      
+    </head>
+    
+    <body>
+        
+ <div class="container-fluid">
+<div class="d-flex justify-content-stretch cover"><img id=overlay class="img-fluid" src="images/background.jpg"></div>
+
+<div class="container">
+<div class="row">
+
+
+    <div id="flip-container">
+
+ <div id="signin" class="face">
+  
+              <div class="rounded rounded-circle">
+                  <img class="logo" src="images/flyt.png">
+              </div>
+
+             <form class="form-signin" action="/login" method="post" role="form">
+         <div class="container-fluid"><img class="full-f" src="images/title.png"></div>      
+               <div class="form-group">
+                 <input type="email" class="form-control" id="userid" name ="loginEmail" value="{{email}}" placeholder="Email">
+               </div>
+               <div class="form-group">
+                 <input type="password" class="form-control" name="loginPass" id="password" value="{{password}}" placeholder="Password">
+               <a href="#" id="toRecover">Forgot your password?</a>
+               </div>
+
+               <!-- This is the section where errors will display to the user -->
+               {{#if error}}
+               <div id="error-signin" class="alert alert-warning alert-dismissible fade show" role="alert"> 
+<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+<span aria-hidden="true">&times;</span>  
+</button>
+<strong>{{message}}</strong>
+</div>
+{{/if}}
+               <!-- end of error message -->
+
+               <div class="d-flex justify-content-around">
+                 <a class="btn btn-primary length" href="/join">Join</a>
+                 <button type="submit" class="btn btn-primary length" id="login">Login</button>
+               </div>
+             </form>
+
+           </div>
+           <!-- end face -->
+
+        
+
+       </div>
+       <!-- end #flip-container -->
+
+</div>
+<!-- end row -->
+
+</div>
+<!-- end container -->
+
+ </div>
+<!-- containerfluid end -->
+    </body>
+    <script src="js/jquery.slim.min.js" ></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+  <!--<script src="flip.js"></script>-->
+    </html>
+  

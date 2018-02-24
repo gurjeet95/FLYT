@@ -1,0 +1,211 @@
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Varela+Round');
+h5, .card a{
+    font-family:"Varela Round" !important;
+}
+p, h5{
+    margin-bottom:0 !important;
+}
+    .partition_1{
+        background-color: #ff6543;
+        height: 10px;
+        width: 94%;
+        margin: 0px auto;
+        margin-bottom:5px;
+      }
+      nav {
+          font-family:"Slabo 27px";
+          font-size:36px;
+          letter-spacing: .5px;
+          /* height:100px; */
+      }
+nav a{
+ color:black;
+      }
+header ul {
+width:100%;
+      }
+.tab-content{
+padding:5px;
+border:5px solid white;
+height:100%;
+overflow:scroll;
+      }
+      .tab-pane{
+background-color:#b1aeae;
+      }
+nav li {
+    text-align: center;
+}
+#plus{
+    object-fit:cover;
+    width:50%;
+    margin:auto;
+}
+.card {
+    background-color: #b0d6ec !important;
+    border:8px solid #b1aeae !important;
+    border-radius:20px !important;
+    
+}
+.card-body{
+    background-color: white;
+    margin:15px 0;
+    padding:0 !important;
+    border-radius:10px;
+}
+.card-footer{
+    border-bottom-left-radius:10px !important;
+    border-bottom-right-radius:10px !important;
+    background-color:black !important;
+}
+.card h5, .card p {
+    padding:10px 15px;
+}
+.card-footer a{
+    color:white;
+}
+
+footer {
+    background-color:#383839;
+    height:75px;
+    position:relative;
+   overflow: hidden;
+}
+footer a{
+    color:white;
+}
+
+
+#gear{
+   object-fit:cover;
+padding:10px;
+}
+#options{
+transition:transform 2s;
+
+}
+#options li{
+    transition:opacity 2.5s;
+}
+
+#settings{
+    background-color:#383839;
+}
+.in{
+   transform:translateX(400px);
+    transition:transform 2s;
+  
+}
+.fade{
+opacity:0;
+transition:opacity 1s;
+}
+header a:hover{
+     color:black;
+   
+ }
+.card-footer a:hover, .card-footer h6, footer a{
+    color:white !important;
+    text-decoration: none !important;
+   
+}
+#landing{
+    border:none !important;
+    width:100%;
+    height:100%;
+    background-color:white !important;
+}
+.welcome_note{
+    width: 100%;
+    background-color: white;
+    font-family: 'Varela Round', sans-serif;
+ /* height:75vh; */
+  }
+  .welcome_banner
+  {
+      width:100%;
+      background-color:#383839;
+      height:175px;
+    padding: 15px 50px;
+  }
+  .text_1 {
+    font-size: 30pt;
+    color: #ffffff;
+    max-height:75px;
+    text-align: left;
+  }
+  .text_2{
+    font-size: 25pt;
+    color: #ffffff;
+        max-height:75px;
+text-align: right;
+   
+  }
+  .text_1 span{
+    color: #ff6543;
+    font-size: 36pt;
+  }
+.text_2 span{
+    color: #ff6543;
+    font-size: 30pt;
+  }
+#banner {
+    width:100%;
+    margin:20px 0;
+
+}
+#instructions .card-body{
+text-align: center;
+}
+#instructions .card{
+background-color: white !important;
+border:none !important;
+}
+#doc{
+position:relative;
+left:8.5px;
+}
+
+
+      @media screen and (max-width:800px){
+#pic{
+    visibility:hidden;
+}
+#cut{
+    height:0;
+    width:0;
+}
+
+      }
+
+      /* INDIVIDUAL POST TEMPLATE */
+
+    
+      #message{
+        background-color: #b0d6ec;
+        padding:10px;
+        border:10px solid white;
+        height:75vh;
+        overflow:scroll;
+              }
+#message .card{
+border:none !important;
+margin:auto;
+}
+.partition_2{
+    background-color:white;
+    height: 6px;
+    width: 94%;
+    margin: 0px auto;
+    margin-bottom:10px;
+}
+h2{
+    color:white !important;
+    padding:10px;
+    
+}
+
+.reply .card-footer,#message .card-footer{
+text-align: right;
+padding:5px  20px!important;
+}

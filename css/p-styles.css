@@ -1,0 +1,28 @@
+html,body{
+    height:100vh;
+}
+.container-fluid{
+    margin:0 !important;
+    padding:0 !important;
+height:100%;    
+    
+}
+.row{
+    height:100%;
+    margin:0 !important;
+}
+footer{
+padding:0 !important;}
+.page{
+background-color: #b0d6ec;
+padding:20px;
+margin:5px;
+}
+form{
+    background-color:white;
+    border-radius:15px;
+    padding:10px;
+}
+.controls{
+    text-align: right;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Login Page</title>
+      
+      
+      <link rel="stylesheet" type="text/css" href="css/page-styles.css"/>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css" >
+   
+      
+    </head>
+     <body>
+        <header>
+          <nav class="container d-flex flex-row justify-content-center">
+            <ul class="nav nav-tabs d-flex row justify-content-around" id="navTab" role="tablist">
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" id="work-tab"  href="/work"  aria-selected="false">Work</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" id="school-tab"  href="/school"  aria-selected="false">School</a></li>
+           <li id="cut" class="nav-item "><a class="nav-link active" id="landing_page" href="/landing"><img id="pic"src="images/small.png"></a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" id="social-tab"  href="/social"  aria-selected="false">Social</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" id="health-tab"  href="/health"  aria-selected="false">Health</a></li>
+           
+           
+           </ul>
+           </nav>
+        </header>
+         <div class="partition_1"></div>
+   
+
+  <div class="container-fluid d-flex flex-column flex-md-row flex-wrap">
+  
+    <!-- CARD first one empty, click to add post -->
+  <div class="card col-lg-4 col-md-6 col-sm-12" data-toggle="modal" data-target="#newpost_work">
+<img id="plus" src="images/plus.png">
+</div>
+<!-- end card -->
+
+<!-- NEW POST MODAL -->
+
+<div class="modal fade" id="newpost_work" tabindex="-1" role="dialog" aria-labelledby="postnew_work" aria-hidden="true">
+<div class="modal-dialog" role="document">
+  <div class="modal-content">
+<div class="modal-header">
+  <h4 class="modal-title">New Post</h4>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  <div class="modal-body">
+    <!-- input -->
+    <div class="form-group">
+<label for="newpost">Message:</label>
+<textarea class="form-control" rows="4" id="work_post"></textarea>
+    </div>
+
+  </div>
+<div class="modal-footer">
+<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+<button type="button" class="btn btn-primary">Post</button>
+</div>
+  </div>
+</div>
+</div>
+<!-- END new post modal -->
+
+
+<div class="card col-lg-4 col-md-6 col-sm-12">
+    <div class="card-body">
+      <h5>Work Post</h5>
+      <p>Example of a post. Brief summary goes here</p>
+      <div class="card-footer">
+          <a href="#"> Read Post</a>
+      </div>
+    </div>
+  </div>
+  <!-- end card -->
+
+  <div class="card col-lg-4 col-md-6 col-sm-12">
+      <div class="card-body">
+        <h5>Title</h5>
+        <p>Example of a post. Brief summary goes here</p>
+        <div class="card-footer">
+            <a href="#"> Read Post</a>
+        </div>
+      </div>
+    </div>
+    <!-- end card -->
+    <div class="card col-lg-4 col-md-6 col-sm-12">
+        <div class="card-body">
+          <h5>Title</h5>
+          <p>Example of a post. Brief summary goes here</p>
+          <div class="card-footer">
+              <a href="#"> Read Post</a>
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+      <div class="card col-lg-4 col-md-6 col-sm-12">
+          <div class="card-body">
+            <h5>Title</h5>
+            <p>Example of a post. Brief summary goes here</p>
+            <div class="card-footer">
+                <a href="#"> Read Post</a>
+            </div>
+          </div>
+        </div>
+        <!-- end card -->
+        <div class="card col-lg-4 col-md-6 col-sm-12">
+            <div class="card-body">
+              <h5>Title</h5>
+              <p>Example of a post. Brief summary goes here</p>
+              <div class="card-footer">
+                  <a href="#"> Read Post</a>
+              </div>
+            </div>
+          </div>
+          <!-- end card -->
+          
+  </div>
+  <!-- end flex container -->
+  <footer>
+  <nav class="d-flex flex-row justify-content-end">
+    <ul id="options" class="nav d-flex flex-row">
+      <li class="nav-item col d-flex align-items-center"><a href="/profile">Profile</a></li>
+      <li class="nav-item col d-flex align-items-center"><a href="/">Logout</a></li>
+    </ul>
+    <ul class="nav d-flex flex-row">
+      <li id="settings" class="nav-item col" data-toggle="toggle" data-target="#options"><img id="gear" src="images/gear.png"></li></ul>
+  </nav>
+</footer>
+
+    </body>
+    <script src="js/jquery.slim.min.js" ></script>
+    <!-- <script src="./node_modules/jquery/dist/jquery.js" ></script> -->
+    
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+  <script src="js/app.js"></script>
+    </html>
+

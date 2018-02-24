@@ -1,0 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Varela+Round');
+
+.cover{position:absolute;
+    width:100%;
+    height:100%;
+}
+#overlay {
+   
+    object-fit:cover;
+opacity:0.38;
+}
+
+body,html{
+height:100%;
+background:linear-gradient( rgba(255,255,255,0.2), rgba(229,118,29,0.2)),#FF6542 !important;
+font-family:"Varela Round" !important;
+}
+.container-fluid{
+    height:100%;
+    padding:0 !important;
+}
+
+#flip-container{
+    position:relative;    
+    margin:12vh auto;
+    width:320px;
+    height:490px;
+ 
+}
+.face{
+    position:absolute;
+    width: 100%;
+    height:100%;
+    background:linear-gradient(to top,rgba(245,245,245,.5) 0%, rgba(245,245,245,.5) 10%, rgba(38, 136, 235, 0.3) 50%, rgba(245,245,245,.4) 95%, rgba(245,245,245,.2) 100%),#B1D7ED;
+    color:#666;
+    padding:20px;
+    border-radius:10px;
+    border:5px solid #fff;
+}
+.rounded{
+    background-color: white;
+    width:200px;
+    height:200px;
+    margin:auto;
+    border:6px solid #F2F2F2;
+    position:relative;
+}
+.full-f{
+    width:50%;
+    padding:5px;
+    margin:auto;
+}
+.logo{
+    position:absolute;
+    left:-15px;right:0;top:15px;bottom:0;
+    margin:auto;
+    width:250px;
+    height:auto;
+}
+#password{
+    margin-bottom:3px;
+}
+#signup input{
+    padding:10px !important;
+    margin:10px auto;
+}
+#recover input{
+    padding:10px !important;
+    margin:10px auto;
+}
+.form-group{
+    margin-bottom:.5rem !important;
+    }
+    input{
+        padding:5px;
+    }
+.length{
+    width:85px;
+    letter-spacing: .5px;
+}
+.longer{
+    width:90px;
+}
+
+form a{
+    font-size: .8rem;
+}
+.form-signin>.container-fluid{
+    margin: auto;
+    text-align: center;
+}
+.recoverHeader{
+    font-size:1.5rem !important;
+    text-align: center;
+}
+.signupHeader{
+    text-align: center;
+}
+#recover .form-signin{
+    position:relative;
+    top:75px;
+}
+.b{
+position:relative;
+top:6px;}
+
+    #signup .form-signin{
+        position:relative;
+        top:75px;
+    }
+    #error-signin{
+        position:absolute;
+        top:280px;
+left:0
+    }
+    #error-recover{
+        position:absolute;
+        top:120px;
+left:0
+    }
+    #error-signup{
+        position:absolute;
+        top:180px;
+left:0;
+padding-top:15px;
+padding-bottom: 15px;
+    }

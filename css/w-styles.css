@@ -1,0 +1,33 @@
+
+
+.container-fluid{
+    margin:0 !important;
+padding:0 !important;
+background-color:#D73C00;
+}
+.wrapper{
+    
+    position:absolute;
+    top:0;bottom:0;left:0;right:0;
+    overflow:scroll !important;
+    background-color:#D73C00;
+}
+#welcome{
+    width:100%;
+    height:auto;
+}
+.access{
+position:absolute;
+top:0;bottom:0;left:0;right:0;
+}
+
+form {
+position:fixed;
+top: 60vh;    width:300px;
+    text-align: center;
+}
+form a {
+    margin:.5rem;
+    padding:2%;
+    font-size:1.5rem !important;
+}

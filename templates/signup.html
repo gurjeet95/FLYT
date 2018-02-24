@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Login Page</title>
+      
+      
+      <link rel="stylesheet" type="text/css" href="css/l-styles.css"/>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="css/bootstrap.min.css" >
+   
+      
+    </head>
+    
+    <body>
+        
+ <div class="container-fluid">
+<div class="d-flex justify-content-stretch cover"><img id=overlay class="img-fluid" src="images/background.jpg"></div>
+
+<div class="container">
+<div class="row">
+
+
+    <div id="flip-container">
+    
+
+        <div id="signup" class="face">
+            <form class="form-signin" method="post" action="/signup" role="form">
+                    <h2 class="signupHeader">Please Sign Up</h2>
+                    <div class="form-group">
+                      <input type="text" class="form-control" name="loginUsername" id="loginUsername" placeholder="Username" required autofocus>
+                      <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="Email address" required>
+                      <input type="password" class="form-control" name="loginPass" id="loginPass" placeholder="Password" required>
+                      <div class="b d-flex justify-content-around">
+                          <a class="btn btn-primary length" href="/" id="jcancel">Cancel</a>  
+                          <button class="btn btn-primary longer" type="submit" id="toSignup">Sign Up</button>
+                        
+                        </div></div>
+            </form>
+                   </div>
+
+           <!-- end face -->
+
+          <!-- This is the section where errors will display to the user -->
+          {{#if error}}
+  <div id="error-signup" class="alert alert-warning alert-dismissible fade show" role="alert"> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>  
+    </button>
+    <!--<strong>{{message}}</strong> -->
+    <strong>{{message}}</strong> 
+    </div>
+    {{/if}}
+                   <!-- end of error message -->
+
+
+       </div>
+       <!-- end #flip-container -->
+
+</div>
+<!-- end row -->
+
+</div>
+<!-- end container -->
+
+ </div>
+<!-- containerfluid end -->
+    </body>
+    <script src="js/jquery.slim.min.js" ></script>
+    <script src="js/popper.min.js" ></script>
+    <script src="js/bootstrap.min.js" ></script>
+  <!--<script src="flip.js"></script>-->
+    </html>
+  
