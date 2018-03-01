@@ -19,23 +19,28 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/school',
-    handler:datahandling.getSchoolpage
+    path: '/{category}',
+    handler:datahandling.getcategorypage
   },
   {
     method: 'GET',
-    path: '/work',
-    handler:datahandling.getWorkpage
+    path: '/{category}/{postid}',
+    handler:datahandling.getsinglepost
+  },
+  {
+    method: 'POST',
+    path: '/{category}',
+    handler:datahandling.post
+  },
+  {
+    method: 'POST',
+    path: '/{category}/{postid}',
+    handler:datahandling.postreply
   },
   {
     method: 'GET',
-    path: '/social',
-    handler:datahandling.getSocialpage
-  },
-  {
-    method: 'GET',
-    path: '/health',
-    handler:datahandling.getHealthpage
+    path: '/{category}/{postid}/{commentid}',
+    handler:datahandling.deletereply
   },
   {
     method: 'POST',
@@ -79,4 +84,4 @@ module.exports = [
         directory: { path: Path.join(__dirname, '/js') }
         }
     }
-  ]
+]

@@ -6,18 +6,15 @@ module.exports={
     getSignuppage:getSignuppage,
     getProfile:getProfile,
     getloginpage:getloginpage,
-    getSchoolpage:getSchoolpage,
-    getHealthpage:getHealthpage,
-    getWorkpage:getWorkpage,
-    getSocialpage:getSocialpage
+    getcategorypage:getcategorypage,
+    getsinglepost:getsinglepost,
+    post:post,
+    postreply:postreply,
+    deletereply:deletereply,
+    testing:testing
     }
 
-
-
-
-
-
- function getHomepage(req,reply){
+function getHomepage(req,reply){
      return reply.view('welcome')
 }
 
@@ -31,18 +28,47 @@ function getloginpage(req,reply){
 function getProfile(req,reply){
      return reply.view('profile')
 }
-function getSchoolpage(req,reply){
-     return reply.view('school')
+
+function postreply(req,reply){
+    let postid = req.params.postid;
+    let category = req.params.category;
+    let userid = getuserid();
+    let replycontent = req.payload.message;
+    let data = {
+        "reply":replycontent,
+        "postedby":userid
+    }
+    savetoreplies(data,category,postid,function(err){
+        if(err){
+            return reply.view('post_template');
+        }
+        else{
+            getsingleposthelper(req,reply);
+        }
+    });
+            
 }
-function getWorkpage(req,reply){
-     return reply.view('work')
+
+function getcategorypage(req,reply){
+    let category = req.params.category;
+    let datamessage = {
+        "data":"true"
+    }
+    getcontent(category,function(err,data){
+        if(err){
+               return reply.view(category,datamessage);
+           }
+           else{
+               datamessage.posts = data;
+               return reply.view(category,datamessage);
+           }
+    });
 }
-function getHealthpage(req,reply){
-     return reply.view('health')
+
+function getsinglepost(req,reply){
+    getsingleposthelper(req,reply);
 }
-function getSocialpage(req,reply){
-     return reply.view('social')
-}
+
 function registerUser(req,reply,source,error){
      let errorMessage = {
         error:"true"
@@ -62,7 +88,8 @@ function registerUser(req,reply,source,error){
       console.log(user.uid)
       let logindata={
           "email":email,
-          "password":password
+          "password":password,
+          "username":username
           }
           database.users.child(user.uid).set(logindata,function(error){
        if(error){
@@ -111,7 +138,65 @@ function loginUser(req,reply){
 }
 
 
+function deletereply(req,reply){
+    let commentid = req.params.commentid;
+    let postid = req.params.postid;
+    let category = req.params.category;
+    database.replies.child(postid).child(commentid).remove(function(err){
+        if(err){
+            
+        }
+        else{
+            getsingleposthelper(req,reply);
+        }
+    });
+ }
 
+
+function post(req,reply){
+    let databasename;
+    let category = req.params.category;
+    let todaydate = getcurrentdate();
+    let todaytime = getcurrenttime();
+    let title = req.payload.healthpost_title;
+    let content = req.payload.newhealthpost;
+    let uid = getuserid();
+    let data={
+        "title":title,
+        "content":content,
+        "postedby":uid
+    }
+
+databasename= getdatabasename(category);
+
+posttodatabase(databasename,data,function(err,data){
+    if(err){
+        console.log(err);
+    }
+    else{
+        savetouserposts(data,uid,function(err,data){
+            if(err){
+                console.log(err);
+            }
+            else{
+                let datamessage = {
+        "data":"true"
+    }
+    getcontent(category,function(err,data){
+        if(err){
+               return reply.view(category,datamessage);
+           }
+           else{
+               datamessage.posts = data;
+               return reply.view(category,datamessage);
+           }
+    });
+            }
+        });
+    }
+});
+    
+}
 
 //unexported functions
 
@@ -120,10 +205,180 @@ function checkuser(){
   return user
 }
 
+function getuserid(){
+     let user = database.firebaseauth.currentUser;
+  return user.uid;
+}
+
+function getcurrentdate(){
+    let date = new Date();
+    let months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+    let weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    let curMonth = months[date.getMonth()];
+    let dayOfWeek = weekday[date.getDay()];
+	let curYear = date.getFullYear();
+	let currdate = date.getDate();
+	let today=currdate+"/"+curMonth+"/"+curYear+"/"+dayOfWeek;
+	return today;
+}
+function getcurrenttime(){
+    let date = new Date();
+      let hours = (date.getHours()<10?'0':'') + date.getHours();
+      let minutes = (date.getMinutes()<10?'0':'') + date.getMinutes();
+      let time = hours+":"+minutes;
+      return time;
+}
+
 database.firebaseauth.onAuthStateChanged(function(user) {
   if (user) {
     console.log("auth state triggered");
   }
 });
+
+function getsingleposthelper(req,reply){
+    let category = req.params.category;
+    let postid = req.params.postid;
+    let datamessage = {
+        "data":"true",
+        "category":category
+    }
+    getpostfromdb(category,postid,function(err,data){
+        if(err){
+            return reply.view('post_template',datamessage);
+        }
+        else{
+            datamessage.post = data;
+            getrepliesfromdb(postid,function(err,data){
+                if(err){
+                    return reply.view('post_template',datamessage);
+                }
+                else{
+                    datamessage.replies = data;
+                    return reply.view('post_template',datamessage);
+                }
+                
+            });
+            
+        }
+    });
+}
+
+function testing(req,reply){
+    let uid = getuserid();
+    database.userposts.child(uid).orderByKey().limitToFirst(5).once("value", function(data) {
+  if(data.val()){
+     let contacts = data.val();
+   if(contacts!=null){
+		let keys = Object.keys(contacts);
+	for(let i=0;i<keys.length;i++){
+    let key= keys[i];
+    console.log(contacts[key].postid);
+  }
+   }
+  }
+  else{
+      console.log("error");
+  }
+});
+}
+
+function getcontent(category,callback){
+    let databasename = getdatabasename(category);
+    databasename.orderByKey().limitToFirst(5).once("value", function(data) {
+  if(data.val()){
+      callback(null,data.val());
+  }
+  else{
+     callback("error");
+  }
+});
+}
+
+function getpostfromdb(category,postid,callback){
+    let databasename = category+"/"+postid;
+    database.posts.child(databasename).once("value", function(data) {
+   if(data.val()){
+      callback(null,data.val());
+   }
+   else{
+       callback("error");
+   }
+});
+}
+
+function getrepliesfromdb(postid,callback){
+    database.replies.child(postid).once("value", function(data) {
+   if(data.val()){
+       console.log(data.val());
+      callback(null,data.val());
+   }
+   else{
+       callback("error");
+   }
+});
+}
+
+
+
+
+function posttodatabase(databasename,data,callback){
+     let newPostRef = databasename.push();
+    let postid = newPostRef.key;
+    data.postid=postid;
+    databasename.child(postid).set(data, function(error) {
+  if (error) {
+     callback(error);
+  } else {
+      let data={
+          "postid":"health/"+postid,
+      }
+      callback(null,data);
+}
+});
+}
+
+function savetouserposts(data,uid,callback){
+    database.userposts.child(uid).push(data,function(error){
+      if(error){
+            callback(error);
+      }  
+      else{
+           callback(null);
+      }
+    });
+}
+
+function savetoreplies(data,category,postid,callback){
+     let newPostRef = database.replies.child(postid).push();
+    let commentid = newPostRef.key;
+    data.commentid=commentid;
+    data.category=category;
+    data.postid=postid;
+    database.replies.child(postid).child(commentid).set(data,function(error){
+      if(error){
+            callback(error);
+      }  
+      else{
+           callback(null);
+      }
+    });
+}
+
+function getdatabasename(category){
+     if(category=="health"){
+    return database.healthposts
+}
+else if(category=="work"){
+    return database.workposts
+}
+else if(category=="social"){
+    return database.socialposts
+}
+
+else if(category=="school"){
+    return database.schoolposts
+}
+}
+
 
 

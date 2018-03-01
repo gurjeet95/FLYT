@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css?family=Slabo+27px|Varela+Round');
 
 .cover{position:absolute;
@@ -13,7 +12,9 @@ opacity:0.38;
 
 body,html{
 height:100%;
-background:linear-gradient( rgba(255,255,255,0.2), rgba(229,118,29,0.2)),#FF6542 !important;
+background:linear-gradient( rgba(229,118,29,0.1),rgba(255,255,255,0.1), rgba(229,118,29,0.1)),#FF6542 !important;
+background-repeat: none;
+background-size: cover;
 font-family:"Varela Round" !important;
 }
 .container-fluid{
@@ -58,6 +59,9 @@ font-family:"Varela Round" !important;
     width:250px;
     height:auto;
 }
+.r-logo{
+
+}
 #password{
     margin-bottom:3px;
 }
@@ -75,17 +79,10 @@ font-family:"Varela Round" !important;
     input{
         padding:5px;
     }
-.length{
-    width:85px;
-    letter-spacing: .5px;
-}
-.longer{
-    width:90px;
-}
 
-form a{
-    font-size: .8rem;
-}
+/*#flip-container form a{*/
+/*    font-size: .8rem;*/
+/*}*/
 .form-signin>.container-fluid{
     margin: auto;
     text-align: center;
@@ -99,16 +96,15 @@ form a{
 }
 #recover .form-signin{
     position:relative;
-    top:75px;
+    top:30px;
 }
 .b{
 position:relative;
 top:6px;}
 
-    #signup .form-signin{
-        position:relative;
-        top:75px;
-    }
+    /*#signup{*/
+    /*    height:70vh !important;*/
+    /*}*/
     #error-signin{
         position:absolute;
         top:280px;
@@ -125,4 +121,4 @@ left:0
 left:0;
 padding-top:15px;
 padding-bottom: 15px;
-    }
+}

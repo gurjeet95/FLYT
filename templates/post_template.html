@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Login Page</title>
+      
+      
+      <link rel="stylesheet" type="text/css" href="/css/page-styles.css"/>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="/css/bootstrap.min.css" >
+   
+      
+    </head>
+    <body>
+        <header>
+          <nav class="container-fluid d-flex flex-row justify-content-center">
+            <ul class="nav container-fluid row d-flex justify-content-around">
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/work" aria-controls="work">Work</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/school" aria-controls="school" >School</a></li>
+           <li id="cut" class="nav-item"><a href="/"><img id="pic"src="/images/small.png"></a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/social" aria-controls="social">Social</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/health" aria-controls="health">Health</a></li>
+           
+           
+           </ul>
+           </nav>
+        </header>
+
+    
+
+<div class="container-fluid content">
+<div class="row">
+    <div class="partition_1"></div>
+
+<div id="message" class="col-12">
+    <div class="post-body card col-10">
+            <div class="card-body d-flex flex-column justify-content-between">
+                    <h5>{{post.title}}</h5>
+                    <p>{{post.content}}</p>
+                    <div class="card-footer" data-toggle="modal" data-target="#reply">
+                        <a href="#"> Reply</a>
+                    </div>
+                  </div>
+    </div>
+    <!-- end card -->
+
+        
+        
+<!-- REPLY MODAL -->
+
+<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-labelledby="reply" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+    <div class="modal-header">
+      <h4 class="modal-title">Reply</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    
+      <div class="modal-body">
+        <!-- input -->
+        <form action="/{{category}}/{{post.postid}}" method="post">
+            <div class="form-group row">
+                
+                <label for="reply_message">Message:</label>
+                <textarea class="form-control" rows="5" type="text" name="message" id="reply_message"></textarea>
+                    
+              </div>
+              <div class="form-group row">
+                  <div class="container-fluid d-flex flex-row justify-content-end no-wrap">
+                      
+                          <a class="col-3 btn btn-secondary" data-dismiss="modal">Cancel</a>
+                          <button type="submit" class="col-3 btn btn-primary">Post</button>
+                        
+                    </div>
+              </div>
+                    
+        </form>
+       
+      </div>
+    
+      </div>
+       <!-- modal content -->
+    </div>
+    <!-- modal dialog -->
+    </div>
+    <!-- END reply modal -->
+
+
+<div id="seperator"> <h2 class="col">Replies</h2> <div class="partition_2"></div></div>
+ 
+<!--Reply container  -->
+<div id="post-replies container-fluid">
+
+<!-- replies -->
+{{#each replies}}
+<div class="reply post-body card col-10">
+        <div class="card-body d-flex flex-column justify-content-between">
+                <p>{{this.reply}}</p>
+                <div class="card-footer">
+                   <h6>Posted by:<span>{{this.postedby}}</span></h6>
+                   <h6> Hello {{helper this.postedby}} </span> </h6>
+                  <a href="/{{this.category}}/{{this.postid}}/{{this.commentid}}">DELETE</a>
+                </div>
+              </div>
+</div>
+{{/each}}
+
+<!-- end replies -->
+ </div>
+<!-- end reply container -->
+
+</div>
+<!-- end message -->
+
+</div>
+<!-- end row -->
+
+</div>
+<!-- end container -->
+
+<footer>
+  <nav class="d-flex flex-row justify-content-end">
+    <ul id="options" class="nav d-flex flex-row">
+      <li class="nav-item col d-flex align-items-center"><a href="profile.html">Profile</a></li>
+      <li class="nav-item col d-flex align-items-center"><a href="#">Logout</a></li>
+    </ul>
+    <ul class="nav d-flex flex-row">
+      <li id="settings" class="nav-item col" data-toggle="toggle" data-target="#options"><img id="gear" src="/images/gear.png"></li></ul>
+  </nav>
+</footer>
+
+    </body>
+    <script src="/js/jquery.slim.min.js" ></script>
+    <!-- <script src="js/jquery.js" ></script> -->
+    
+    <script src="/js/popper.min.js" ></script>
+    <script src="/js/bootstrap.min.js" ></script>
+  <script src="/js/app.js"></script>
+</html>

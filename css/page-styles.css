@@ -24,13 +24,16 @@ nav a{
 header ul {
 width:100%;
       }
+      .container{
+          margin:0 !important;
+      }
 .tab-content{
 padding:5px;
 border:5px solid white;
 height:100%;
 overflow:scroll;
       }
-      .tab-pane{
+      .pane{
 background-color:#b1aeae;
       }
 nav li {
@@ -45,6 +48,7 @@ nav li {
     background-color: #b0d6ec !important;
     border:8px solid #b1aeae !important;
     border-radius:20px !important;
+    min-height:250px !important;
     
 }
 .card-body{
@@ -165,18 +169,21 @@ border:none !important;
 position:relative;
 left:8.5px;
 }
-
-
-      @media screen and (max-width:800px){
-#pic{
-    visibility:hidden;
+textarea, input{
+    margin-right:20px !important;
+    margin-left:20px !important;
+    
 }
-#cut{
-    height:0;
-    width:0;
+.form-group a,label{
+margin:10px !important;
+}
+.modal-header{
+    padding-bottom:0 !important;
 }
 
-      }
+
+
+
 
       /* INDIVIDUAL POST TEMPLATE */
 
@@ -192,6 +199,7 @@ left:8.5px;
 border:none !important;
 margin:auto;
 }
+
 .partition_2{
     background-color:white;
     height: 6px;
@@ -208,4 +216,34 @@ h2{
 .reply .card-footer,#message .card-footer{
 text-align: right;
 padding:5px  20px!important;
+}
+.content .card{
+    min-height:200px !important;
+
+}
+
+
+
+
+@media screen and (max-width:800px){
+    #pic{
+        visibility:hidden;
+    }
+    #cut{
+        height:0;
+        width:0;
+    }
+    
+    .text_1, .text_2{
+    font-size:2rem;
+    text-align:center;
+    }
+    .text_1{
+        line-height: 2rem;
+    }
+    .text_2{
+        line-height: 2rem;
+        position: relative;
+        bottom:1.3rem;
+    }
 }

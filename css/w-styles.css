@@ -1,20 +1,21 @@
-
-
+@import url('https://fonts.googleapis.com/css?family=Slabo+27px|Varela+Round');
+h1,h2{
+    font-family:"Varela Round" !important;
+    font-size:3rem !important;
+}
+h1{
+    position:relative;
+    right:40px;
+}
 .container-fluid{
-    margin:0 !important;
-padding:0 !important;
+color:white;
 background-color:#D73C00;
 }
-.wrapper{
-    
-    position:absolute;
-    top:0;bottom:0;left:0;right:0;
-    overflow:scroll !important;
-    background-color:#D73C00;
-}
+
 #welcome{
     width:100%;
     height:auto;
+    padding:0!important;
 }
 .access{
 position:absolute;
@@ -22,12 +23,25 @@ top:0;bottom:0;left:0;right:0;
 }
 
 form {
-position:fixed;
-top: 60vh;    width:300px;
+position:absolute;
+bottom: 20vh; 
+left:37.5vw;
+margin:auto;   
+width:300px;
     text-align: center;
 }
 form a {
     margin:.5rem;
     padding:2%;
     font-size:1.5rem !important;
+}
+.logo{
+  width:80%;
+  height:auto;
+  margin-top:.5rem;
+}
+.banner {
+    margin-top:1rem;
+    margin-bottom:2rem;
+    position:relative
 }

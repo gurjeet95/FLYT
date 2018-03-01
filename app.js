@@ -21,7 +21,8 @@ server.views({
         engines: {
             html: require('handlebars')
         },
-        path: Path.join(__dirname, 'templates')
+        path: Path.join(__dirname, 'templates'),
+        helpersPath: 'helpers'
     });
 server.start(function (err) {
     if (err) {
