@@ -6,7 +6,7 @@ let Inert = require('inert');
 
  server.connection({
     host: process.env.IP,
-    port: Number(process.argv[2] || 8080)
+    port: Number(process.env.PORT || 8080)
 });
 
 server.register(Inert, (err) => {
