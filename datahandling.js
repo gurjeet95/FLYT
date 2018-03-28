@@ -44,6 +44,7 @@ function getrecoverpage(req,reply){
      return reply.view('recover')
 }
 function getProfile(req,reply){
+	if(checkuser()){
     let datamessage = {
         "data":"true"
     }
@@ -56,7 +57,10 @@ function getProfile(req,reply){
            return reply.view('profile',data)
        }
     });
-    
+	}
+	else{
+		 return reply.view('welcome');
+	}
     
 }
 
