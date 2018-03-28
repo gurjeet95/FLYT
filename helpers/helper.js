@@ -1,5 +1,10 @@
 module.exports = function(options,context) {
-    console.log(options);
-   console.log(context.name);
-    return "yes";
+    let postedby = options;
+    let userid = context.data.root.userid;
+    if(postedby == userid){
+        return true;
+    }
+    else{
+    return null;
+    }
 }

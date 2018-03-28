@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <title>Recover Page</title>
+      
+      
+      <link rel="stylesheet" type="text/css" href="/css/l-styles.css"/>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  
+      <!-- Bootstrap CSS -->
+      <link rel="stylesheet" href="/css/bootstrap.min.css" >
+   
+      
+    </head>
+    
+    <body>
+        
+ <div class="container-fluid">
+<!-- <div class="d-flex justify-content-stretch cover"><img id=overlay class="img-fluid" src="../imgs/background.jpg"></div> -->
+
+<div class="container">
+<div class="row">
+
+
+    <div id="flip-container">
+
+        <div id="recover" class="face">
+             <div class="rounded rounded-circle">
+                  <img class="logo" src="/images/flyt.png">
+              </div>
+            <form class="form-signin" action="/recover" method="post" role="form">
+            <h3 class="recoverHeader">Reset your password</h3>
+            <div class="form-group">
+            <input type="email" class="form-control" name="loginEmail" id="loginEmail" placeholder="Email address"required autofocus>
+            <div class="b row d-flex justify-content-around">
+            <a class="col-4 btn btn-primary " id="cancelit" href="/loginpage">Cancel</a>
+            <button type="submit" class="col-4 btn btn-primary" id="recoverid">Recover</button>
+            </div></div>
+            </form>
+            </div>
+
+           <!-- end face -->
+
+  <!-- This is the section where errors will display to the user -->
+  {{#if error}}
+  <div id="error-recover" class="alert alert-warning alert-dismissible fade show" role="alert"> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>  
+    </button>
+    {{#if data}}
+    <strong>password reset email is sent. <a href="/loginpage">Click here</a> to login.</strong> 
+    {{else}}
+    <strong>{{message}}</strong> 
+    {{/if}}
+    </div>
+    {{/if}}
+                   <!-- end of error message -->
+
+
+       </div>
+       <!-- end #flip-container -->
+
+</div>
+<!-- end row -->
+
+</div>
+<!-- end container -->
+
+ </div>
+<!-- containerfluid end -->
+    </body>
+    <script src="/js/jquery.slim.min.js" ></script>
+    <script src="/js/popper.min.js" ></script>
+    <script src="/js/bootstrap.min.js" ></script>
+    </html>
+  

@@ -14,6 +14,7 @@ server.register(Inert, (err) => {
 });
 
 server.register(Vision, function (err) {
+    
         if (err) throw err;
     });
 server.route(require('./routes'));

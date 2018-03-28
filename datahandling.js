@@ -1,8 +1,10 @@
 const database = require('./database');
 module.exports={
     getHomepage:getHomepage,
+    getrecoverpage:getrecoverpage,
     registerUser:registerUser,
     loginUser:loginUser,
+    recoverpassword:recoverpassword,
     getSignuppage:getSignuppage,
     getProfile:getProfile,
     getloginpage:getloginpage,
@@ -10,12 +12,24 @@ module.exports={
     getsinglepost:getsinglepost,
     post:post,
     postreply:postreply,
+    changepassword:changepassword,
     deletereply:deletereply,
-    testing:testing
+    signout:signout,
+    deletepost:deletepost,
+    getafterloginpage:getafterloginpage
     }
 
 function getHomepage(req,reply){
      return reply.view('welcome')
+}
+
+function getafterloginpage(req,reply){
+    if(checkuser()){
+        return reply.view('page_template');
+    }
+    else{
+        return reply.view('welcome');
+    }
 }
 
 function getSignuppage(req,reply){
@@ -25,18 +39,86 @@ function getSignuppage(req,reply){
 function getloginpage(req,reply){
      return reply.view('login')
 }
+
+function getrecoverpage(req,reply){
+     return reply.view('recover')
+}
 function getProfile(req,reply){
-     return reply.view('profile')
+    let datamessage = {
+        "data":"true"
+    }
+    let userid = getuserid();
+    getuserposthelper(userid,datamessage,function(err,data){
+       if(err){
+            return reply.view('profile',data)
+       } 
+       else{
+           return reply.view('profile',data)
+       }
+    });
+    
+    
+}
+
+function changepassword(req,reply,source,error){
+    if(checkuser()){
+    let newPassword = req.payload.loginPass;
+     let dataMessage = {
+        error:"true",
+        data:"true"
+    };
+    let userid = getuserid();
+     if(error){
+        dataMessage.message = error.data.details[0].message;
+        getuserposthelper(userid,dataMessage,function(err,data){
+       if(err){
+            return reply.view('profile',data)
+       } 
+       else{
+           return reply.view('profile',data)
+       }
+        });
+    }
+    let user = database.firebaseauth.currentUser;
+
+user.updatePassword(newPassword).then(function() {
+  dataMessage.message="password change successful";
+  getuserposthelper(userid,dataMessage,function(err,data){
+       if(err){
+            return reply.view('profile',data)
+       } 
+       else{
+           return reply.view('profile',data)
+       }
+        });
+}).catch(function(error) {
+  dataMessage.message = error.message;
+  getuserposthelper(userid,dataMessage,function(err,data){
+       if(err){
+            return reply.view('profile',data)
+       } 
+       else{
+           return reply.view('profile',data)
+       }
+        });
+});
+}
+else{
+    return reply.view('welcome');
+}
 }
 
 function postreply(req,reply){
+    if(checkuser()){
     let postid = req.params.postid;
     let category = req.params.category;
     let userid = getuserid();
+    let username = getusername();
     let replycontent = req.payload.message;
     let data = {
         "reply":replycontent,
-        "postedby":userid
+        "postedby":userid,
+        "displayname":username
     }
     savetoreplies(data,category,postid,function(err){
         if(err){
@@ -46,10 +128,14 @@ function postreply(req,reply){
             getsingleposthelper(req,reply);
         }
     });
-            
+    }
+    else{
+        return reply.view('welcome');
+    }
 }
 
 function getcategorypage(req,reply){
+    if(checkuser()){
     let category = req.params.category;
     let datamessage = {
         "data":"true"
@@ -64,9 +150,18 @@ function getcategorypage(req,reply){
            }
     });
 }
+else{
+    return reply.view('welcome')
+}
+}
 
 function getsinglepost(req,reply){
+    if(checkuser()){
     getsingleposthelper(req,reply);
+    }
+    else{
+        return reply.view('welcome');
+    }
 }
 
 function registerUser(req,reply,source,error){
@@ -83,31 +178,19 @@ function registerUser(req,reply,source,error){
     let user;
    
     database.firebaseauth.createUserWithEmailAndPassword(email, password).then(function(data) {
-      console.log("user registered")
       user = database.firebaseauth.currentUser;
-      console.log(user.uid)
       let logindata={
           "email":email,
           "password":password,
           "username":username
           }
-          database.users.child(user.uid).set(logindata,function(error){
-       if(error){
-            return reply("Data could not be saved");
-       }
-       else{
            user.updateProfile({
   displayName: username
 }).then(function() {
-    console.log(user.displayName)
-  return reply.view('login',logindata);
+return reply.view('login',logindata);
 }).catch(function(error) {
  console.log("user error")
 });
-
-            
-       }
-    })
     })
     .catch(function(error){
       errorMessage.message = error.message;
@@ -138,7 +221,24 @@ function loginUser(req,reply){
 }
 
 
+function recoverpassword(req,reply){
+     let errorMessage = {
+        error:"true"
+    };
+     let emailAddress = req.payload.loginEmail;
+     database.firebaseauth.sendPasswordResetEmail(emailAddress).then(function() {
+       errorMessage.data = "true"
+    return reply.view('recover',errorMessage);
+}).catch(function(error) {
+  errorMessage.message = error.message;
+   return reply.view('recover',errorMessage);
+});
+
+}
+
+
 function deletereply(req,reply){
+    if( checkuser()){
     let commentid = req.params.commentid;
     let postid = req.params.postid;
     let category = req.params.category;
@@ -150,12 +250,18 @@ function deletereply(req,reply){
             getsingleposthelper(req,reply);
         }
     });
+    }
+    else{
+        return reply.view('welcome');
+    }
  }
 
 
 function post(req,reply){
+    if(checkuser()){
     let databasename;
     let category = req.params.category;
+    let username = getusername();
     let todaydate = getcurrentdate();
     let todaytime = getcurrenttime();
     let title = req.payload.healthpost_title;
@@ -164,16 +270,19 @@ function post(req,reply){
     let data={
         "title":title,
         "content":content,
-        "postedby":uid
-    }
+        "postedby":uid,
+        "displayname":username,
+        "date":getcurrentdate()
+     }
 
 databasename= getdatabasename(category);
 
-posttodatabase(databasename,data,function(err,data){
+posttodatabase(databasename,data,category,function(err,data1){
     if(err){
         console.log(err);
     }
     else{
+        
         savetouserposts(data,uid,function(err,data){
             if(err){
                 console.log(err);
@@ -195,6 +304,10 @@ posttodatabase(databasename,data,function(err,data){
         });
     }
 });
+}
+else{
+    return reply.view('welcome');
+}
     
 }
 
@@ -210,15 +323,20 @@ function getuserid(){
   return user.uid;
 }
 
+function getusername(){
+     let user = database.firebaseauth.currentUser;
+     return user.displayName;
+}
+
 function getcurrentdate(){
     let date = new Date();
-    let months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
-    let weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday');
+    let months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec');
+    let weekday = new Array('Sun', 'Mond', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
     let curMonth = months[date.getMonth()];
     let dayOfWeek = weekday[date.getDay()];
 	let curYear = date.getFullYear();
 	let currdate = date.getDate();
-	let today=currdate+"/"+curMonth+"/"+curYear+"/"+dayOfWeek;
+	let today=dayOfWeek+" "+currdate+"/"+curMonth+"/"+curYear;
 	return today;
 }
 function getcurrenttime(){
@@ -240,7 +358,8 @@ function getsingleposthelper(req,reply){
     let postid = req.params.postid;
     let datamessage = {
         "data":"true",
-        "category":category
+        "category":category,
+        "userid":getuserid()
     }
     getpostfromdb(category,postid,function(err,data){
         if(err){
@@ -263,28 +382,9 @@ function getsingleposthelper(req,reply){
     });
 }
 
-function testing(req,reply){
-    let uid = getuserid();
-    database.userposts.child(uid).orderByKey().limitToFirst(5).once("value", function(data) {
-  if(data.val()){
-     let contacts = data.val();
-   if(contacts!=null){
-		let keys = Object.keys(contacts);
-	for(let i=0;i<keys.length;i++){
-    let key= keys[i];
-    console.log(contacts[key].postid);
-  }
-   }
-  }
-  else{
-      console.log("error");
-  }
-});
-}
-
 function getcontent(category,callback){
     let databasename = getdatabasename(category);
-    databasename.orderByKey().limitToFirst(5).once("value", function(data) {
+    databasename.orderByKey().once("value", function(data) {
   if(data.val()){
       callback(null,data.val());
   }
@@ -309,7 +409,6 @@ function getpostfromdb(category,postid,callback){
 function getrepliesfromdb(postid,callback){
     database.replies.child(postid).once("value", function(data) {
    if(data.val()){
-       console.log(data.val());
       callback(null,data.val());
    }
    else{
@@ -321,24 +420,23 @@ function getrepliesfromdb(postid,callback){
 
 
 
-function posttodatabase(databasename,data,callback){
+function posttodatabase(databasename,data,category,callback){
      let newPostRef = databasename.push();
     let postid = newPostRef.key;
     data.postid=postid;
+    data.category=category;
     databasename.child(postid).set(data, function(error) {
   if (error) {
      callback(error);
   } else {
-      let data={
-          "postid":"health/"+postid,
-      }
       callback(null,data);
 }
 });
 }
 
 function savetouserposts(data,uid,callback){
-    database.userposts.child(uid).push(data,function(error){
+    let postkey = data.postid;
+    database.userposts.child(uid).child(postkey).set(data,function(error){
       if(error){
             callback(error);
       }  
@@ -378,6 +476,71 @@ else if(category=="social"){
 else if(category=="school"){
     return database.schoolposts
 }
+}
+
+
+function getuserposthelper(userid,datamessage,callback){
+    database.userposts.child(userid).orderByKey().once("value", function(data) {
+     if(data.val()){
+         datamessage.posts = data.val();
+         callback(null,datamessage);
+     }  
+     else{
+          callback("error");
+     }
+       
+    })
+}
+
+function deletepost(req,reply){
+    if(checkuser()){
+     let postedby = req.params.postedby;
+    let postid = req.params.postid;
+    let category = req.params.category;
+     database.posts.child(category).child(postid).remove(function(err){
+        if(err){
+            
+        }
+        else{
+            database.userposts.child(postedby).child(postid).remove(function(err){
+               if(err){
+                   
+               } 
+               else{
+                   database.replies.child(postid).remove(function(err){
+                       if(err){
+                           
+                       }
+                       else{
+                            let datamessage = {
+        "data":"true"
+    }
+    let userid = getuserid();
+    getuserposthelper(userid,datamessage,function(err,data){
+       if(err){
+            return reply.view('profile',data)
+       } 
+       else{
+           return reply.view('profile',data)
+       }
+    });
+                       }
+                   });
+               }
+            });
+        }
+    });
+    }
+    else{
+        return reply.view('welcome');
+    }
+}
+function signout(req,reply){
+    database.firebaseauth.signOut().then(function() {
+ return reply.view('welcome')
+}).catch(function(error) {
+  return reply.view('welcome')
+});
 }
 
 

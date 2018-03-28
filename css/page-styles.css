@@ -113,6 +113,7 @@ header a:hover{
     text-decoration: none !important;
    
 }
+
 #landing{
     border:none !important;
     width:100%;
@@ -224,6 +225,41 @@ padding:5px  20px!important;
 
 
 
+/* Profile Page*/
+
+.card h3{
+    color: white;
+    font-size: 2.5rem;
+    letter-spacing: .1rem;
+ 
+}
+.h3:hover{
+    cursor: pointer;
+}
+
+.round{
+    border:8px solid white;
+    border-radius: 50%;
+    width:200px;
+    height:200px;
+}
+.t{
+    width:100%;
+    height:auto;
+    filter:invert(100%);
+}
+
+.by{
+    border-bottom:2px solid black;
+}
+.tr{
+    width:80%;
+    height:auto;
+    filter:invert(100%);
+}
+h6{
+    margin:.5rem !important;
+}
 
 @media screen and (max-width:800px){
     #pic{
@@ -246,4 +282,92 @@ padding:5px  20px!important;
         position: relative;
         bottom:1.3rem;
     }
-}
+          }
+
+
+  /* landing page  */
+  .landing_font
+  {
+    font-family: "Varela Round" !important;
+  }
+  .landing_head
+  {
+      width: 100%;
+      background:transparent url('/images/ch1.jpg') no-repeat scroll top center;
+  }
+  .landing_img
+  {
+    width: 200px;
+    height: 200px;
+  }
+  .landing_img1
+  {
+    width: 400px;
+    height: 200px;
+  }
+  .landing_curve
+  {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 10;
+  }
+  .landing-jb
+  {
+    padding: 30px 0px;
+  }
+  .landing_text
+  {
+    color: white;
+    font-size: 35px;
+    padding: 15px 0px;
+  }
+  .landing_btn
+  {
+    width: 150px;
+    height: 60px;
+    margin: 20px 40px;
+  }
+  .landing_btn a,.landing_btn a:hover
+  {
+    text-decoration: none;
+    color: white;
+  }
+  .ldg_box
+  {
+    font-size: 40px;
+    text-align: center;
+  }
+  .ldg_boxes
+  {
+    text-align: center;
+    font-size: 25px;
+  }
+  .landing_footer
+  {
+    background-color: #232732;
+    width: 100%;
+    padding: 10px;
+  }
+  .landing_footer_text
+  {
+    color: white;
+    text-align: center;
+    font-size: 18px;
+  }
+  .rows
+  {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .langing_space
+  {
+    width: 100%;
+    margin: 15px 0px;
+  }
+  
+  
+  .customdesign{
+      padding-top: 15px !important;
+  }

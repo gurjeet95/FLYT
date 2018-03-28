@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <title>Login Page</title>
+      <title>Profile Page</title>
       
       
-      <link rel="stylesheet" type="text/css" href="css/page-styles.css"/>
-      <link rel="stylesheet" type="text/css" href="css/p-styles.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/page-styles.css"/>
+      <link rel="stylesheet" type="text/css" href="/css/p-styles.css"/>
       
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   
       <!-- Bootstrap CSS -->
-      <link rel="stylesheet" href="css/bootstrap.min.css" >
+      <link rel="stylesheet" href="/css/bootstrap.min.css" >
    
       
     </head>
     <body>
             <div class="container-fluid">
-                    <div class="row flex-column, justify-content-center">
+                    <div class="row">
 
         <header class="col-12">
-          <nav class="container d-flex flex-row justify-content-center">
-            <ul class="nav d-flex row justify-content-around">
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="#">Work</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="">School</a></li>
-           <li id="cut" class="nav-item "><a class="nav-link"  href="#"><img id="pic"src="images/small.png"></a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="#">Social</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="#">Health</a></li>
+          <nav class="container-fluid d-flex flex-row justify-content-center">
+            <ul class="nav d-flex row justify-content-around no-wrap">
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/work">Work</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/school">School</a></li>
+           <li id="cut" class="nav-item "><a class="nav-link"  href="/homepage"><img id="pic"src="/images/small.png"></a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/social">Social</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/health">Health</a></li>
            
            
            </ul>
@@ -36,43 +36,149 @@
      
         <div class="partition_1"></div>
 
-
-
-        <div class="page col-12 d-flex justify-content-center">
-                <form class="col-6">
-                    <h3>Edit Profile:</h3>
-        <div class="form-group">
-             <label for="username">Username:</label>
-            <input type="username" class="form-control" id="username" aria-describedby="username" placeholder="Enter New Username">
-             </div>
-                    <div class="form-group">
-        <label for="email">Email Address:</label>
-        <input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter Another Email">
-                    </div>
-        <div class="form-group">
-          <label for="password">Password:</label>
-         <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Enter New Password">
+<!-- <div class="container-fluid d-flex flex-row justify-content-center">
+    <div class="page col-11 d-flex flex-row justify-content-center">
+        
+      <form class="col-5">
+            <h3>Edit Profile:</h3>
+<div class="form-group">
+     <label for="username">Username:</label>
+    <input type="username" class="form-control" id="username" aria-describedby="username" placeholder="Enter New Username">
+     </div>
+            <div class="form-group">
+<label for="email">Email Address:</label>
+<input type="email" class="form-control" id="email" aria-describedby="email" placeholder="Enter Another Email">
             </div>
-            <div class="controls">
-                    <a class="btn btn-info" href="#">Cancel</a>
-                    <a class="btn btn-info" href="#">Save</a>
-            </div>
-            
-                </form>
-               
-                
-            </div>
-        <!-- page -->
-
+<div class="form-group">
+  <label for="password">Password:</label>
+ <input type="password" class="form-control" id="password" aria-describedby="password" placeholder="Enter New Password">
+    </div>
+    <div class="controls col-11">
+            <a class="btn btn-info" href="#">Cancel</a>
+            <a class="btn btn-info" href="#">Save</a>
+    </div>
+    
+        </form>
        
+        
+    </div> -->
+<!-- page -->
+<!-- </div> -->
+
+    <!-- container -->
+
+    <div class="container-fluid">
+      <div class="row">
+          <div class="partition_1"></div>
+      <!-- TAB CONTENT -->
+      
+      <div class="tab-content col-12">
+      
+      
+      
+      
+      <div class="container-fluid pane">
+      
+        <div class="container-fluid d-flex flex-column flex-md-row flex-wrap">
+        
+          <!-- CARD first one empty, click to add post -->
+        <div class="card col-lg-4 col-md-6 col-sm-12 d-flex flex-row justify-content-center align-items-center" data-toggle="modal" data-target="#edit">
+      <div class="round d-flex flex-row justify-content-center align-items-center"><h3>Edit</h3></div>
+      </div>
+      <!-- end card -->
+      
+      
+      <!-- NEW POST MODAL -->
+      
+      <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="edit" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Edit</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          
+            <div class="modal-body">
+              <!-- input -->
+              <form action="/changepassword" method="post" role="form">
+                  <div class="form-group row">
+                      <label for="schoolpost_title">New Password:</label>
+                      <input class="form-control" name="loginPass" type="password" id="new_password" placeholder="Enter New Password" aria-describedby="password">
+                      
+                    </div>
+                    <div class="form-group row">
+                        <div class="container-fluid d-flex flex-row justify-content-end no-wrap">
+                            
+                                <a class="col-3 btn btn-secondary" data-dismiss="modal">Cancel</a>
+                                <button type="submit" class="col-3 btn btn-primary">Save</button>
+                              
+                          </div>
+                    </div>
+                          
+              </form>
+             
+            </div>
+          
+            </div>
+             <!-- modal content -->
+          </div>
+          <!-- modal dialog -->
+          </div>
+          <!-- END new post modal -->
+          {{#if error}}
+  <div id="error-recover" class="alert alert-warning alert-dismissible fade show" role="alert"> 
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>  
+    </button>
+    <strong>{{message}}</strong> 
+    </div>
+    {{/if}}
+      
+{{#if data}}
+{{#each posts}}
+      <div class="card col-lg-4 col-md-6 col-sm-12">
+          <div class="card-body d-flex flex-column justify-content-between">
+            <h5>{{this.title}}</h5>
+            <p>{{this.content}}</p>
+              <div class="card-footer d-flex flex-row justify-content-between">
+                <div class="col-10"><a href="/{{this.category}}/{{this.postid}}"> Read Post</a> </div><div class="col-2"><a href="/del/{{this.postedby}}/{{this.category}}/{{this.postid}}"> <img class="t" src="/images/rubbish-bin.svg"></a></div>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+{{/if}}
+        <!-- end card -->
+      
+       
+                
+        </div>
+        <!-- end flex container -->
+      
+      </div>
+      <!-- end social tab -->
+      
+      
+      
+      
+      </div>
+      <!-- end tab content -->
+      </div>
+      <!-- end row -->
+      
+      </div>
+      <!-- end container -->
+      
+      
                 <footer class="col-12 align-self-end">
                         <nav class="d-flex flex-row justify-content-end">
                           <ul id="options" class="nav d-flex flex-row">
-                            <li class="nav-item col d-flex align-items-center"><a href="#">Profile</a></li>
-                            <li class="nav-item col d-flex align-items-center"><a href="#">Logout</a></li>
+                            <li class="nav-item col d-flex align-items-center"><a href="/profile">Profile</a></li>
+                            <li class="nav-item col d-flex align-items-center"><a href="/signout">Logout</a></li>
                           </ul>
                           <ul class="nav d-flex flex-row">
-                            <li id="settings" class="nav-item col" data-toggle="toggle" data-target="#options"><img id="gear" src="images/gear.png"></li></ul>
+                            <li id="settings" class="nav-item col" data-toggle="toggle" data-target="#options"><img id="gear" src="/images/gear.png"></li></ul>
                         </nav>
                       </footer>
     
@@ -84,11 +190,10 @@
 
 
     </body>
-    <script src="js/jquery.slim.min.js" ></script>
+    <script src="/js/jquery.slim.min.js" ></script>
     <!-- <script src="./node_modules/jquery/dist/jquery.js" ></script> -->
     
-    <script src="js/popper.min.js" ></script>
-    <script src="js/bootstrap.min.js" ></script>
-  <script src="js/app.js"></script>
-    </html>
-  
+    <script src="/js/popper.min.js" ></script>
+    <script src="/js/bootstrap.min.js" ></script>
+  <script src="/js/app.js"></script>
+</html>

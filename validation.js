@@ -4,6 +4,10 @@ const userSchema = {
   loginEmail:joi.string().required().email(),
   loginPass:joi.string().min(6).max(20).required()
 }
+const passSchema = {
+  loginPass:joi.string().min(6).max(20).required()
+}
 module.exports={
-    userSchema:userSchema
+    userSchema:userSchema,
+    passSchema:passSchema
 }

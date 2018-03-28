@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <title>Login Page</title>
+      <title>Post Page</title>
       
       
       <link rel="stylesheet" type="text/css" href="/css/page-styles.css"/>
@@ -19,7 +19,7 @@
             <ul class="nav container-fluid row d-flex justify-content-around">
            <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/work" aria-controls="work">Work</a></li>
            <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/school" aria-controls="school" >School</a></li>
-           <li id="cut" class="nav-item"><a href="/"><img id="pic"src="/images/small.png"></a></li>
+           <li id="cut" class="nav-item"><a href="/homepage"><img id="pic"src="/images/small.png"></a></li>
            <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/social" aria-controls="social">Social</a></li>
            <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/health" aria-controls="health">Health</a></li>
            
@@ -96,18 +96,35 @@
 <div id="post-replies container-fluid">
 
 <!-- replies -->
-{{#each replies}}
 <div class="reply post-body card col-10">
-        <div class="card-body d-flex flex-column justify-content-between">
-                <p>{{this.reply}}</p>
-                <div class="card-footer">
-                   <h6>Posted by:<span>{{this.postedby}}</span></h6>
-                   <h6> Hello {{helper this.postedby}} </span> </h6>
-                  <a href="/{{this.category}}/{{this.postid}}/{{this.commentid}}">DELETE</a>
-                </div>
-              </div>
-</div>
+{{#if (helper post.postedby)}}
+ {{#each replies}}
+    <div class="card-body d-flex flex-column justify-content-between">
+    <div class="col-12 d-flex flex-row justify-content-start">
+        <div class="col-12 by"><h6>Posted by:<span>{{this.displayname}}</span></h6></div></div>
+          <p>{{this.reply}}</p>
+          <div class="card-footer d-flex flex-row justify-content-between">
+            <div class="col-10"></div> <div class="col-1"><a href="/{{this.category}}/{{this.postid}}/{{this.commentid}}"> <img class="tr" src="/images/rubbish-bin.svg"></a></div>
+          </div>
+        </div>
 {{/each}}
+{{else}}
+{{#each replies}}
+    <div class="card-body d-flex flex-column justify-content-between">
+    <div class="col-12 d-flex flex-row justify-content-start">
+        <div class="col-12 by"><h6>Posted by:<span>{{this.displayname}}</span></h6></div></div>
+          <p>{{this.reply}}</p>
+          <div class="card-footer d-flex flex-row justify-content-between">
+            <div class="col-10"></div> 
+           {{#if (helper this.postedby)}}
+            <div class="col-1"><a href="/{{this.category}}/{{this.postid}}/{{this.commentid}}"><img class="tr" src="/images/rubbish-bin.svg"> </a></div>
+            {{/if}}
+          </div>
+        </div>
+        
+        {{/each}}
+{{/if}}
+
 
 <!-- end replies -->
  </div>
@@ -125,8 +142,8 @@
 <footer>
   <nav class="d-flex flex-row justify-content-end">
     <ul id="options" class="nav d-flex flex-row">
-      <li class="nav-item col d-flex align-items-center"><a href="profile.html">Profile</a></li>
-      <li class="nav-item col d-flex align-items-center"><a href="#">Logout</a></li>
+      <li class="nav-item col d-flex align-items-center"><a href="/profile">Profile</a></li>
+      <li class="nav-item col d-flex align-items-center"><a href="/signout">Logout</a></li>
     </ul>
     <ul class="nav d-flex flex-row">
       <li id="settings" class="nav-item col" data-toggle="toggle" data-target="#options"><img id="gear" src="/images/gear.png"></li></ul>

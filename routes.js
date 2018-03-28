@@ -12,10 +12,41 @@ module.exports = [
     path: '/join',
     handler:datahandling.getSignuppage
   },
+   {
+    method: 'GET',
+    path: '/homepage',
+    handler:datahandling.getafterloginpage
+  },
+  {
+    method: 'GET',
+    path: '/signout',
+    handler:datahandling.signout
+  },
   {
     method: 'GET',
     path: '/loginpage',
     handler:datahandling.getloginpage
+  },
+  {
+    method: 'GET',
+    path: '/recoverpage',
+    handler:datahandling.getrecoverpage
+  },
+   {
+    method: 'POST',
+    path: '/recover',
+    handler:datahandling.recoverpassword
+  },
+  {
+    method: 'POST',
+    path: '/changepassword',
+    handler:datahandling.changepassword,
+     config:{
+      validate: {
+      payload:validation.passSchema,
+       failAction:datahandling.changepassword 
+      }
+      }
   },
   {
     method: 'GET',
@@ -41,6 +72,11 @@ module.exports = [
     method: 'GET',
     path: '/{category}/{postid}/{commentid}',
     handler:datahandling.deletereply
+  },
+   {
+    method: 'GET',
+    path: '/del/{postedby}/{category}/{postid}',
+    handler:datahandling.deletepost
   },
   {
     method: 'POST',
