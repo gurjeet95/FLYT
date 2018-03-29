@@ -73,7 +73,7 @@
     
       <div class="modal-body">
         <!-- input -->
-        <form  action="/social" method="post" role="form">
+        <form  action="/category/social" method="post" role="form">
             <div class="form-group row">
                 <label for="healthpost_title">Title:</label>
                 <input class="form-control" type="text" id="healthpost_title" name="healthpost_title">
@@ -108,7 +108,7 @@
       <h5>{{titlehelper this.title}}</h5>
       <p>{{contenthelper this.content}}</p>
       <div class="card-footer">
-          <a href="/social/{{this.postid}}"> Read Post</a><br>
+          <a href="/get/social/{{this.postid}}"> Read Post</a><br>
            <a href="#">By:{{this.displayname}}</a><br>
           <a href="#"> {{this.date}} </a>
       </div>
