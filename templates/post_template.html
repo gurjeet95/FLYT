@@ -17,11 +17,11 @@
         <header>
           <nav class="container-fluid d-flex flex-row justify-content-center">
             <ul class="nav container-fluid row d-flex justify-content-around">
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/work" aria-controls="work">Work</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/school" aria-controls="school" >School</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/category/work" aria-controls="work">Work</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/category/school" aria-controls="school" >School</a></li>
            <li id="cut" class="nav-item"><a href="/homepage"><img id="pic"src="/images/small.png"></a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/social" aria-controls="social">Social</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/health" aria-controls="health">Health</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/category/social" aria-controls="social">Social</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/category/health" aria-controls="health">Health</a></li>
            
            
            </ul>
@@ -62,7 +62,7 @@
     
       <div class="modal-body">
         <!-- input -->
-        <form action="/{{category}}/{{post.postid}}" method="post">
+        <form action="/reply/{{category}}/{{post.postid}}" method="post">
             <div class="form-group row">
                 
                 <label for="reply_message">Message:</label>
@@ -104,7 +104,7 @@
         <div class="col-12 by"><h6>Posted by:<span>{{this.displayname}}</span></h6></div></div>
           <p>{{this.reply}}</p>
           <div class="card-footer d-flex flex-row justify-content-between">
-            <div class="col-10"></div> <div class="col-1"><a href="/{{this.category}}/{{this.postid}}/{{this.commentid}}"> <img class="tr" src="/images/rubbish-bin.svg"></a></div>
+            <div class="col-10"></div> <div class="col-1"><a href="/delete/{{this.category}}/{{this.postid}}/{{this.commentid}}"> <img class="tr" src="/images/rubbish-bin.svg"></a></div>
           </div>
         </div>
 {{/each}}
@@ -117,7 +117,7 @@
           <div class="card-footer d-flex flex-row justify-content-between">
             <div class="col-10"></div> 
            {{#if (helper this.postedby)}}
-            <div class="col-1"><a href="/{{this.category}}/{{this.postid}}/{{this.commentid}}"><img class="tr" src="/images/rubbish-bin.svg"> </a></div>
+            <div class="col-1"><a href="/delete/{{this.category}}/{{this.postid}}/{{this.commentid}}"><img class="tr" src="/images/rubbish-bin.svg"> </a></div>
             {{/if}}
           </div>
         </div>
