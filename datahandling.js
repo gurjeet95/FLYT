@@ -24,12 +24,7 @@ function getHomepage(req,reply){
 }
 
 function getafterloginpage(req,reply){
-    if(checkuser()){
         return reply.view('page_template');
-    }
-    else{
-        return reply.view('welcome');
-    }
 }
 
 function getSignuppage(req,reply){
@@ -44,7 +39,6 @@ function getrecoverpage(req,reply){
      return reply.view('recover')
 }
 function getProfile(req,reply){
-	if(checkuser()){
     let datamessage = {
         "data":"true"
     }
@@ -58,10 +52,6 @@ function getProfile(req,reply){
            return reply.view('profile',data)
        }
     });
-	}
-	else{
-		 return reply.view('welcome');
-	}
     
 }
 
@@ -140,7 +130,6 @@ function postreply(req,reply){
 }
 
 function getcategorypage(req,reply){
-    if(checkuser()){
     console.log("userid on categorypage:"+getuserid());
     let category = req.params.category;
     let datamessage = {
@@ -155,10 +144,6 @@ function getcategorypage(req,reply){
                return reply.view(category,datamessage);
            }
     });
-}
-else{
-    return reply.view('welcome')
-}
 }
 
 function getsinglepost(req,reply){
