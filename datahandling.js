@@ -379,6 +379,7 @@ function getsingleposthelper(req,reply){
 
 function getcontent(category,callback){
     let databasename = getdatabasename(category);
+    console.log(databasename);
     databasename.orderByKey().once("value", function(data) {
   if(data.val()){
       callback(null,data.val());
