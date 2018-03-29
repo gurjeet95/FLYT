@@ -460,17 +460,17 @@ function savetoreplies(data,category,postid,callback){
 
 function getdatabasename(category){
      if(category=="health"){
-    return database.healthposts
+    return "database.healthposts"
 }
 else if(category=="work"){
-    return database.workposts
+    return "database.workposts"
 }
 else if(category=="social"){
-    return database.socialposts
+    return "database.socialposts"
 }
 
 else if(category=="school"){
-    return database.schoolposts
+    return "database.schoolposts"
 }
 }
 
