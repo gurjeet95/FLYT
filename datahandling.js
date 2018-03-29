@@ -351,11 +351,6 @@ function getcurrenttime(){
       return time;
 }
 
-database.firebaseauth.onAuthStateChanged(function(user) {
-  if (user) {
-    console.log("auth state triggered");
-  }
-});
 
 function getsingleposthelper(req,reply){
     let category = req.params.category;
