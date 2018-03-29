@@ -141,6 +141,7 @@ function postreply(req,reply){
 
 function getcategorypage(req,reply){
     if(checkuser()){
+    console.log("userid on categorypage":+getuserid());
     let category = req.params.category;
     let datamessage = {
         "data":"true"
@@ -267,6 +268,7 @@ function post(req,reply){
     let title = req.payload.healthpost_title;
     let content = req.payload.newhealthpost;
     let uid = getuserid();
+    console.log("userid on post "+uid);
     let data={
         "title":title,
         "content":content,
@@ -379,7 +381,6 @@ function getsingleposthelper(req,reply){
 
 function getcontent(category,callback){
     let databasename = getdatabasename(category);
-    console.log(databasename);
     databasename.orderByKey().once("value", function(data) {
   if(data.val()){
       callback(null,data.val());
