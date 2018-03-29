@@ -22,11 +22,11 @@
         <header class="col-12">
           <nav class="container-fluid d-flex flex-row justify-content-center">
             <ul class="nav d-flex row justify-content-around no-wrap">
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/work">Work</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/school">School</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/category/work">Work</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/category/school">School</a></li>
            <li id="cut" class="nav-item "><a class="nav-link"  href="/homepage"><img id="pic"src="/images/small.png"></a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/social">Social</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/health">Health</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/category/social">Social</a></li>
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/category/health">Health</a></li>
            
            
            </ul>
@@ -143,7 +143,7 @@
             <h5>{{titlehelper this.title}}</h5>
             <p>{{contenthelper this.content}}</p>
               <div class="card-footer d-flex flex-row justify-content-between">
-                <div class="col-10"><a href="/{{this.category}}/{{this.postid}}"> Read Post</a> </div><div class="col-2"><a href="/del/{{this.postedby}}/{{this.category}}/{{this.postid}}"> <img class="t" src="/images/rubbish-bin.svg"></a></div>
+                <div class="col-10"><a href="/get/{{this.category}}/{{this.postid}}"> Read Post</a> </div><div class="col-2"><a href="/del/{{this.postedby}}/{{this.category}}/{{this.postid}}"> <img class="t" src="/images/rubbish-bin.svg"></a></div>
             </div>
           </div>
         </div>
