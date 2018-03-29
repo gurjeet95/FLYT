@@ -141,7 +141,7 @@ function postreply(req,reply){
 
 function getcategorypage(req,reply){
     if(checkuser()){
-    console.log("userid on categorypage":+getuserid());
+    console.log("userid on categorypage:"+getuserid());
     let category = req.params.category;
     let datamessage = {
         "data":"true"
