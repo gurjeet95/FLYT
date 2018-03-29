@@ -55,22 +55,22 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/{category}/{postid}',
+    path: '/get/{category}/{postid}',
     handler:datahandling.getsinglepost
   },
   {
     method: 'POST',
-    path: '/{category}',
+    path: '/category/{category}',
     handler:datahandling.post
   },
   {
     method: 'POST',
-    path: '/{category}/{postid}',
+    path: '/reply/{category}/{postid}',
     handler:datahandling.postreply
   },
   {
     method: 'GET',
-    path: '/{category}/{postid}/{commentid}',
+    path: '/delete/{category}/{postid}/{commentid}',
     handler:datahandling.deletereply
   },
    {
