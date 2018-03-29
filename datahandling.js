@@ -49,6 +49,7 @@ function getProfile(req,reply){
         "data":"true"
     }
     let userid = getuserid();
+    console.log(userid);
     getuserposthelper(userid,datamessage,function(err,data){
        if(err){
             return reply.view('profile',data)
