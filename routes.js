@@ -50,7 +50,7 @@ module.exports = [
   },
   {
     method: 'GET',
-    path: '/{category}',
+    path: '/category/{category}',
     handler:datahandling.getcategorypage
   },
   {
