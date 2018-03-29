@@ -197,6 +197,8 @@ function loginUser(req,reply){
      let email = req.payload.loginEmail;
      let password = req.payload.loginPass;
         database.firebaseauth.signInWithEmailAndPassword(email, password).then(function(data) {
+           let user = database.firebaseauth.currentUser;
+          console.log(user.displayName);
           return reply.view('page_template');
 })
 .catch(function(error){
