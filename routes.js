@@ -44,6 +44,9 @@ module.exports = [
      config:{
       validate: {
       payload:validation.passSchema,
+         options:{
+    allowUnknown: true
+  },
        failAction:datahandling.changepassword 
       }
       }
