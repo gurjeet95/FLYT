@@ -39,11 +39,13 @@ function getrecoverpage(req,reply){
      return reply.view('recover')
 }
 function getProfile(req,reply){
+    let userid = req.payload.useruid;
+    let username = req.payload.username;
     let datamessage = {
-        "data":"true"
+        "data":"true",
+        userid:userid,
+        username:username
     }
-    let userid = getuserid();
-    console.log(userid);
     getuserposthelper(userid,datamessage,function(err,data){
        if(err){
             return reply.view('profile',data)
@@ -56,13 +58,15 @@ function getProfile(req,reply){
 }
 
 function changepassword(req,reply,source,error){
-    if(checkuser()){
     let newPassword = req.payload.loginPass;
+    let userid = req.payload.useruid;
+    let username = req.payload.username;
      let dataMessage = {
         error:"true",
-        data:"true"
+        data:"true",
+        userid:userid,
+        username:username
     };
-    let userid = getuserid();
      if(error){
         dataMessage.message = error.data.details[0].message;
         getuserposthelper(userid,dataMessage,function(err,data){
@@ -74,9 +78,9 @@ function changepassword(req,reply,source,error){
        }
         });
     }
-    let user = database.firebaseauth.currentUser;
-
-user.updatePassword(newPassword).then(function() {
+database.adminauth.updateUser(userid,{
+    password:newPassword
+}).then(function(data) {
   dataMessage.message="password change successful";
   getuserposthelper(userid,dataMessage,function(err,data){
        if(err){
@@ -98,17 +102,12 @@ user.updatePassword(newPassword).then(function() {
         });
 });
 }
-else{
-    return reply.view('welcome');
-}
-}
 
 function postreply(req,reply){
-    if(checkuser()){
     let postid = req.params.postid;
     let category = req.params.category;
-    let userid = getuserid();
-    let username = getusername();
+    let userid = req.payload.useruid;
+    let username = req.payload.username;
     let replycontent = req.payload.message;
     let data = {
         "reply":replycontent,
@@ -123,17 +122,17 @@ function postreply(req,reply){
             getsingleposthelper(req,reply);
         }
     });
-    }
-    else{
-        return reply.view('welcome');
-    }
 }
 
 function getcategorypage(req,reply){
-    console.log("userid on categorypage:"+getuserid());
+    let userid = req.payload.useruid;
+    let username = req.payload.username;
+    console.log(username);
     let category = req.params.category;
     let datamessage = {
-        "data":"true"
+        "data":"true",
+        userid : userid,
+        username : username
     }
     getcontent(category,function(err,data){
         if(err){
@@ -147,12 +146,7 @@ function getcategorypage(req,reply){
 }
 
 function getsinglepost(req,reply){
-    if(checkuser()){
     getsingleposthelper(req,reply);
-    }
-    else{
-        return reply.view('welcome');
-    }
 }
 
 function registerUser(req,reply,source,error){
@@ -169,15 +163,16 @@ function registerUser(req,reply,source,error){
     let user;
    
     database.firebaseauth.createUserWithEmailAndPassword(email, password).then(function(data) {
-      user = database.firebaseauth.currentUser;
+      
       let logindata={
           "email":email,
           "password":password,
           "username":username
           }
-           user.updateProfile({
-  displayName: username
-}).then(function() {
+        let userid = data.uid;
+           database.adminauth.updateUser(userid,{
+    displayName:username
+}).then(function(data) {
 return reply.view('login',logindata);
 }).catch(function(error) {
  console.log("user error")
@@ -197,9 +192,13 @@ function loginUser(req,reply){
      let email = req.payload.loginEmail;
      let password = req.payload.loginPass;
         database.firebaseauth.signInWithEmailAndPassword(email, password).then(function(data) {
-           let user = database.firebaseauth.currentUser;
-          console.log(user.displayName);
-          return reply.view('page_template');
+           let userid = data.uid;
+           let username = data.displayName;
+           let userinfo ={
+               userid : userid,
+               username : username
+           }
+          return reply.view('page_template',userinfo);
 })
 .catch(function(error){
   errorMessage.message = error.message;
@@ -226,7 +225,6 @@ function recoverpassword(req,reply){
 
 
 function deletereply(req,reply){
-    if( checkuser()){
     let commentid = req.params.commentid;
     let postid = req.params.postid;
     let category = req.params.category;
@@ -238,30 +236,25 @@ function deletereply(req,reply){
             getsingleposthelper(req,reply);
         }
     });
-    }
-    else{
-        return reply.view('welcome');
-    }
  }
 
 
 function post(req,reply){
-    if(checkuser()){
     let databasename;
     let category = req.params.category;
-    let username = getusername();
+    let username = req.payload.username;
     let todaydate = getcurrentdate();
     let todaytime = getcurrenttime();
     let title = req.payload.healthpost_title;
     let content = req.payload.newhealthpost;
-    let uid = getuserid();
+    let uid = req.payload.useruid;
     console.log("userid on post "+uid);
     let data={
         "title":title,
         "content":content,
         "postedby":uid,
         "displayname":username,
-        "date":getcurrentdate()
+        "date":todaydate
      }
 
 databasename= getdatabasename(category);
@@ -278,7 +271,9 @@ posttodatabase(databasename,data,category,function(err,data1){
             }
             else{
                 let datamessage = {
-        "data":"true"
+        "data":"true",
+         userid : uid,
+        username : username
     }
     getcontent(category,function(err,data){
         if(err){
@@ -293,29 +288,11 @@ posttodatabase(databasename,data,category,function(err,data1){
         });
     }
 });
-}
-else{
-    return reply.view('welcome');
-}
     
 }
 
 //unexported functions
 
-function checkuser(){
-  let user = database.firebaseauth.currentUser;
-  return user
-}
-
-function getuserid(){
-     let user = database.firebaseauth.currentUser;
-  return user.uid;
-}
-
-function getusername(){
-     let user = database.firebaseauth.currentUser;
-     return user.displayName;
-}
 
 function getcurrentdate(){
     let date = new Date();
@@ -340,13 +317,17 @@ function getcurrenttime(){
 function getsingleposthelper(req,reply){
     let category = req.params.category;
     let postid = req.params.postid;
+    let userid = req.payload.useruid;
+    let username = req.payload.username;
     let datamessage = {
         "data":"true",
         "category":category,
-        "userid":getuserid()
+        userid:userid,
+        username:username
     }
     getpostfromdb(category,postid,function(err,data){
         if(err){
+            console.log(err);
             return reply.view('post_template',datamessage);
         }
         else{
@@ -477,10 +458,11 @@ function getuserposthelper(userid,datamessage,callback){
 }
 
 function deletepost(req,reply){
-    if(checkuser()){
      let postedby = req.params.postedby;
     let postid = req.params.postid;
     let category = req.params.category;
+    let userid = req.payload.useruid;
+    let username = req.payload.username;
      database.posts.child(category).child(postid).remove(function(err){
         if(err){
             
@@ -497,9 +479,10 @@ function deletepost(req,reply){
                        }
                        else{
                             let datamessage = {
-        "data":"true"
+        "data":"true",
+       userid:userid,
+        username:username
     }
-    let userid = getuserid();
     getuserposthelper(userid,datamessage,function(err,data){
        if(err){
             return reply.view('profile',data)
@@ -514,18 +497,7 @@ function deletepost(req,reply){
             });
         }
     });
-    }
-    else{
-        return reply.view('welcome');
-    }
 }
 function signout(req,reply){
-    database.firebaseauth.signOut().then(function() {
- return reply.view('welcome')
-}).catch(function(error) {
-  return reply.view('welcome')
-});
+    return reply.view('welcome')
 }
-
-
-
