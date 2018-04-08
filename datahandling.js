@@ -111,6 +111,7 @@ function changepassword(req,reply,source,error){
        }
         });
     }
+	else{
 database.adminauth.updateUser(userid,{
     password:newPassword
 }).then(function(data) {
@@ -134,6 +135,7 @@ database.adminauth.updateUser(userid,{
        }
         });
 });
+	}
 }
 
 function postreply(req,reply){
