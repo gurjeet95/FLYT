@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-      <title>Social Page</title>
+      <title>School Page</title>
       
       
       <link rel="stylesheet" type="text/css" href="/css/page-styles.css"/>
@@ -16,7 +16,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-116575270-1');
 </script>
 
@@ -26,12 +25,47 @@
         <header>
           <nav class="container-fluid d-flex flex-row justify-content-center no-wrap">
             <ul class="nav d-flex row justify-content-around">
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/category/work" aria-controls="work">Work</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/category/school"  aria-controls="school">School</a></li>
-           <li id="cut" class="nav-item "><a class="nav-link"  href="/homepage" aria-control="landing"><img id="pic" src="/images/small.png"></a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link"  href="/category/social"  aria-controls="social">Social</a></li>
-           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center"><a class "nav-link" href="/category/health" aria-controls="health">Health</a></li>
-           
+          <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center">
+             <form action="/category/work" method="POST">
+            <input type="hidden" id="userid" name="useruid" value="{{userid}}" />
+             <input type="hidden" name="username" value="{{username}}" />
+             <input type="hidden" class="local" id="local" name="local" value=""/>
+            <a class "nav-link" onclick="event.preventDefault(); this.parentNode.submit()" href="#" aria-controls="work">Work</a
+            </form>
+            </li>
+            <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center">
+             <form action="/category/school" method="POST">
+            <input type="hidden" name="useruid" value="{{userid}}" />
+             <input type="hidden" name="username" value="{{username}}" />
+             <input type="hidden" class="local" id="local" name="local" value="" />
+            <a class "nav-link" onclick="event.preventDefault(); this.parentNode.submit()" href="#" aria-controls="school">School</a>
+            </form>
+            </li>
+            <li id="cut" class="nav-item">
+             <form action="/homepage" method="POST">
+            <input type="hidden" name="useruid" value="{{userid}}" />
+             <input type="hidden" name="username" value="{{username}}" />
+             <input type="hidden" class="local" id="local" name="local" value="" />
+            <a class "nav-link" onclick="event.preventDefault(); this.parentNode.submit()" href="#" aria-controls="landing"><img id="pic" src="images/small.png"></a>
+            </form>
+            </li>
+  
+           <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center">
+             <form action="/category/social" method="POST">
+            <input type="hidden" name="useruid" value="{{userid}}" />
+             <input type="hidden" name="username" value="{{username}}" />
+             <input type="hidden" class="local" id="local" name="local" value="" />
+            <a class "nav-link" onclick="event.preventDefault(); this.parentNode.submit()" href="#" aria-controls="social">Social</a>
+            </form>
+            </li>
+            <li class="nav-item col-md-2 col-sm-12 d-flex flex-column justify-content-center">
+             <form action="/category/health" method="POST">
+            <input type="hidden" name="useruid" value="{{userid}}" />
+             <input type="hidden" name="username" value="{{username}}" />
+             <input type="hidden" class="local" id="local" name="local" value="" />
+            <a class "nav-link" onclick="event.preventDefault(); this.parentNode.submit()" href="#" aria-controls="health">Health</a>
+            </form>
+            </li>
            
            </ul>
            </nav>
@@ -73,8 +107,11 @@
     
       <div class="modal-body">
         <!-- input -->
-        <form  action="/category/social" method="post" role="form">
+        <form  action="/post/category/social" method="post" role="form">
             <div class="form-group row">
+                 <input type="hidden" name="useruid" value="{{userid}}" />
+                 <input type="hidden" name="username" value="{{username}}" />
+                 <input type="hidden" class="local" id="local" name="local" value="" />
                 <label for="healthpost_title">Title:</label>
                 <input class="form-control" type="text" id="healthpost_title" name="healthpost_title">
                 <label for="newhealthpost">Message:</label>
@@ -108,8 +145,13 @@
       <h5>{{titlehelper this.title}}</h5>
       <p>{{contenthelper this.content}}</p>
       <div class="card-footer">
-          <a href="/get/social/{{this.postid}}"> Read Post</a><br>
-           <a href="#">By:{{this.displayname}}</a><br>
+        <form action="/get/social/{{this.postid}}" method="POST">
+            <input type="hidden" name="useruid" value="{{idhelper}}" />
+             <input type="hidden" name="username" value="{{namehelper}}" />
+             <input type="hidden" class="local" id="local" name="local" value="" />
+            <a onclick="event.preventDefault(); this.parentNode.submit()" href="#" >Read Post</a>
+            </form>
+          <a href="#">By:{{this.displayname}}</a><br>
           <a href="#"> {{this.date}} </a>
       </div>
     </div>
@@ -138,7 +180,13 @@
 <footer>
   <nav class="d-flex flex-row justify-content-end">
     <ul id="options" class="nav d-flex flex-row">
-      <li class="nav-item col d-flex align-items-center"><a href="/profile">Profile</a></li>
+      <li class="nav-item col d-flex align-items-center"> 
+      <form action="/profile" method="POST">
+        <input type="hidden" name="useruid" value="{{userid}}" />
+        <input type="hidden" name="username" value="{{username}}" />
+        <input type="hidden" class="local" id="local" name="local" value="" />
+        <a href="#" onclick="event.preventDefault(); this.parentNode.submit()" >Profile</a>
+        </form></li>
       <li class="nav-item col d-flex align-items-center"><a href="/signout">Logout</a></li>
     </ul>
     <ul class="nav d-flex flex-row">
@@ -149,7 +197,7 @@
     </body>
     <script src="/js/jquery.slim.min.js" ></script>
     <!-- <script src="./node_modules/jquery/dist/jquery.js" ></script> -->
-    
+    <script src="/js/getlocal.js" ></script>
     <script src="/js/popper.min.js" ></script>
     <script src="/js/bootstrap.min.js" ></script>
   <script src="/js/app.js"></script>
