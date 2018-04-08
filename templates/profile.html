@@ -225,7 +225,8 @@
                 <footer class="col-12 align-self-end">
                         <nav class="d-flex flex-row justify-content-end">
                           <ul id="options" class="nav d-flex flex-row">
-                            <li class="nav-item col d-flex align-items-center"><form action="/profile" method="POST">
+                            <li class="nav-item col d-flex align-items-center">
+                                <form class="profileform" action="/profile" method="POST">
         <input type="hidden" name="useruid" value="{{userid}}" />
         <input type="hidden" name="username" value="{{username}}"/>
         <input type="hidden" class="local" id="local" name="local" value="" />
