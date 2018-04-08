@@ -367,6 +367,12 @@ h6{
     margin: 15px 0px;
   }
   
+form{
+      outline: none;
+  }
+  a{
+       outline: none;
+  }
   
   .customdesign{
       padding-top: 15px !important;
