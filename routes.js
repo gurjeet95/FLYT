@@ -49,18 +49,18 @@ module.exports = [
       }
   },
   {
-    method: 'GET',
+    method: 'POST',
     path: '/category/{category}',
     handler:datahandling.getcategorypage
   },
   {
-    method: 'GET',
+    method: 'POST',
     path: '/get/{category}/{postid}',
     handler:datahandling.getsinglepost
   },
   {
     method: 'POST',
-    path: '/category/{category}',
+    path: '/post/category/{category}',
     handler:datahandling.post
   },
   {
@@ -69,12 +69,12 @@ module.exports = [
     handler:datahandling.postreply
   },
   {
-    method: 'GET',
+    method: 'POST',
     path: '/delete/{category}/{postid}/{commentid}',
     handler:datahandling.deletereply
   },
    {
-    method: 'GET',
+    method: 'POST',
     path: '/del/{postedby}/{category}/{postid}',
     handler:datahandling.deletepost
   },
@@ -90,7 +90,7 @@ module.exports = [
       }
   },
   {
-    method: 'GET',
+    method: 'POST',
     path: '/profile',
     handler:datahandling.getProfile
   },
