@@ -24,7 +24,14 @@ function getHomepage(req,reply){
 }
 
 function getafterloginpage(req,reply){
-        return reply.view('page_template');
+	let userid = req.payload.useruid;
+    let username = req.payload.username;
+     let dataMessage = {
+        data:"true",
+        userid:userid,
+        username:username
+    };
+        return reply.view('page_template',dataMessage);
 }
 
 function getSignuppage(req,reply){
