@@ -13,7 +13,7 @@ module.exports = [
     handler:datahandling.getSignuppage
   },
    {
-    method: 'GET',
+    method: 'POST',
     path: '/homepage',
     handler:datahandling.getafterloginpage
   },
